@@ -18,10 +18,9 @@ describe('respec:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'bower.json',
+      'index.html',
       'package.json',
-      '.editorconfig',
-      '.jshintrc'
+      '.editorconfig'
     ]);
   });
 });
