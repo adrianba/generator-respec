@@ -31,11 +31,11 @@ module.exports = yeoman.generators.Base.extend({
         default: 'unofficial'
       },{
         name: 'editorName',
-        message: "What is the editor's name?",
+        message: 'What is the editor\'s name?',
         store: true
       },{
         name: 'editorUrl',
-        message: "What is the editor's URL (web site, mailto:, etc.)?",
+        message: 'What is the editor\'s URL (web site, mailto:, etc.)?',
         store: true
       },{
         name: 'editorCompany',
