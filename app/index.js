@@ -1,6 +1,5 @@
 'use strict';
 var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
@@ -13,32 +12,74 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the beautiful ' + chalk.red('Respec') + ' generator!'
+      'Welcome to the Respec generator, the even more stark raving awesome way to start writing specs!'
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+        name: 'title',
+        message: 'What is the title of this specification?',
+        default: 'Sample specification'
+      },{
+        name: 'shortName',
+        message: 'What is the "short name" for the specification?',
+        default: 'sample-spec'
+      },{
+        type: 'list',
+        name: 'specStatus',
+        message: 'What is the specification status?',
+        choices: ['unofficial', 'ED', 'FPWD', 'WD', 'LC', 'CR', 'PR', 'REC', 'WG-NOTE', 'CG-DRAFT', 'CG-FINAL', 'base', 'PER', 'RSCND', 'NOTE', 'FPWD-NOTE', 'BG-DRAFT', 'BG-FINAL', 'IG-NOTE', 'Member-SUBM', 'Team-SUBM', 'XGR', 'draft-finding', 'finding', 'MO'],
+        default: 'unofficial'
+      },{
+        name: 'editorName',
+        message: "What is the editor's name?",
+        store: true
+      },{
+        name: 'editorUrl',
+        message: "What is the editor's URL (web site, mailto:, etc.)?",
+        store: true
+      },{
+        name: 'editorCompany',
+        message: 'What company does the editor work for?',
+        store: true
+      },{
+        name: 'editorCompanyUrl',
+        message: 'What is the URL for the company?',
+        store: true
+      }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      var config = { };
+      config.shortName = props.shortName;
+      config.specStatus = props.specStatus;
+      var editor = { };
+      editor.name = props.editorName;
+      editor.url = props.editorUrl;
+      editor.company = props.editorCompany;
+      editor.companyURL = props.editorCompanyUrl;
+      config.editors = [editor];
 
+      var data = {
+        title: props.title,
+        shortname: config.shortName,
+        editor: editor,
+        respecConfig: JSON.stringify(config,null,4)
+      };
+      this.data = data;
       done();
     }.bind(this));
   },
 
   writing: {
     app: function () {
-      this.fs.copy(
+      this.fs.copyTpl(
         this.templatePath('_package.json'),
-        this.destinationPath('package.json')
+        this.destinationPath('package.json'),
+        this.data
       );
-      this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
+      this.fs.copyTpl(
+        this.templatePath('spec.html'),
+        this.destinationPath('index.html'),
+        this.data
       );
     },
 
@@ -47,16 +88,10 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('editorconfig'),
         this.destinationPath('.editorconfig')
       );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
     }
   },
 
   install: function () {
-    this.installDependencies({
-      skipInstall: this.options['skip-install']
-    });
+    this.npmInstall();
   }
 });

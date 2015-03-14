@@ -1,5 +1,12 @@
 {
-  "name": "package",
+  "name": "<%= shortname %>",
+  "descripton" : "<%= title %>",
+  "author" : {
+    "name" : "<%= editor.name %>",
+    "url" : "<%= editor.url %>"
+  },
+  "main" : "index.html",
+  "private" : "true",
   "version": "0.0.0",
   "dependencies": {}
 }
