@@ -1,4 +1,4 @@
-# generator-respec [![Build Status](https://secure.travis-ci.org/adrianba/generator-respec.png?branch=master)](https://travis-ci.org/adrianba/generator-respec)
+# generator-respec
 
 > [Yeoman](http://yeoman.io) generator
 
