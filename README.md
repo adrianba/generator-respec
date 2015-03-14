@@ -1,9 +1,16 @@
 # generator-respec
 
-> [Yeoman](http://yeoman.io) generator
+> [Yeoman](http://yeoman.io) generator for creating ReSpec-based specifications
 
+## ReSpec
 
-## Getting Started
+### What is ReSpec
+
+[ReSpec](http://www.w3.org/respec/) is a JS library that makes it easier to write technical specifications, or documents that tend to be technical in nature in general. It was originally designed for the purpose of writing W3C specifications, but has since grown to be able to support other outputs as well.
+
+The [ReSpec project](https://github.com/w3c/respec) is hosted on GitHub.
+
+## Yeoman
 
 ### What is Yeoman?
 
