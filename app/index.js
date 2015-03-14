@@ -12,7 +12,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the Respec generator, the even more stark raving awesome way to start writing specs!'
+      'Welcome to the ReSpec generator, the even more stark raving awesome way to start writing specs!'
     ));
 
     var prompts = [{
